@@ -15,6 +15,18 @@ function setVehicleHandlingFlags(vehicle, flags, byte, value, bool)
     local hex = guessHex(byte, value)
     return setVehicleHandling(vehicle, flags, bool and bitOr(hnd, hex) or bitAnd(hnd, bitNot(hex)))
 end
+
+function getModelHandlingFlags(model, flags, byte, value)
+    local hnd = getModelHandling(model)[flags]
+    local hex = guessHex(byte, value)
+    return bitAnd(hnd, hex) ~= 0
+end
+
+function setModelHandlingFlags(model, flags, byte, value, bool)
+	local hnd = getModelHandling(model)[flags]
+	local hex = guessHex(byte, value)
+	return setModelHandling(model, flags, bool and bitOr(hnd, hex) or bitAnd(hnd, bitNot(hex)))
+end
 ```
 
 ## Examples of use
